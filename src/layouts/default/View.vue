@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <v-app-bar class="px-3" color="white" flat density="compact">
+  <v-app-bar class="px-3" color="primary" flat density="compact">
     <v-avatar color="grey-darken-1" size="32"></v-avatar>
 
     <v-spacer></v-spacer>
@@ -12,17 +12,20 @@
     </v-tabs>
     <v-spacer></v-spacer>
 
-    <v-avatar
-      class="hidden-sm-and-down"
-      color="grey-darken-1"
-      size="32"
-    ></v-avatar>
+    <v-btn text icon @click="toggleTheme">
+      <v-icon>mdi-theme-light-dark</v-icon>
+    </v-btn>
   </v-app-bar>
-  <v-main class="bg-grey-lighten-3">
+  <v-main class="background">
     <router-view />
   </v-main>
 </template>
 
 <script setup>
+import { useTheme } from 'vuetify'
 const links = ['Dashboard', 'Messages', 'Profile', 'Updates']
+const theme = useTheme()
+function toggleTheme() {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
 </script>
